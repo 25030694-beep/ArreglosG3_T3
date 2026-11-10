@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Arreglos.Logica;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -96,25 +97,27 @@ namespace Arreglos.Logica
             }
         }
 
+        //Metodo eliminar 
+        public void Eliminar()
 
         //Metodo Insertar 
-        public void Insertar(int numero , int posicion )
+        public void Insertar(int numero, int posicion)
         {
             if (EstaLleno)
             {
                 throw new Exception("El arreglo esta lleno");
             }
 
-            if (posicion<0)
+            if (posicion < 0)
             {
                 posicion = 0;
             }
-            if (posicion> _tope)
+            if (posicion > _tope)
             {
-                posicion = _tope; 
+                posicion = _tope;
             }
 
-            for (int i = _tope;i > posicion; i--)
+            for (int i = _tope; i > posicion; i--)
             {
                 _arreglo[i] = _arreglo[i - 1];
             }
@@ -123,8 +126,53 @@ namespace Arreglos.Logica
         }
 
 
+        public void Eliminar(int posicion)
+        {
+            if (EstaVacio)
+            {
+                throw new Exception("El arreglo está vacío");
+            }
 
-        public override string ToString()
+            if (posicion < 0)
+            {
+                posicion = 0;
+            }
+            if (posicion > _tope)
+            {
+                posicion = _tope;
+            }
+
+            for (int i = posicion; i <= _tope - 1; i++)
+            {
+                _arreglo[i] = _arreglo[i + 1];
+            }
+            _tope--;
+        }
+
+        //Metodo obtener pares 
+        public MiArreglo ObtenerPares()
+{
+    int contandoPares = 0;
+    for (int i = 0; i < _tope; i++);
+    {
+        if (_arreglo[i] % 2 == 0 )
+        {
+            contandoPares++;
+        }
+        MiArreglo oMiArreglo = new MiArreglo(contandoPares);
+
+        for (int j = 0; j < _tope; j++)
+                {
+                    if (_arreglo[j] % 2 == 0)
+                    {
+                        oMiArreglo.Agregar(_arreglo[j]);
+                    }
+                }
+    }
+            return oMiArreglo;
+}
+
+public override string ToString()
         {
             if (EstaVacio)
             {
